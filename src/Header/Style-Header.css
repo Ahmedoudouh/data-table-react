@@ -1,0 +1,20 @@
+.iconAdd {
+    cursor: pointer;
+    width: 40px;
+    margin: 0 20px 20px;
+}
+
+.icons {
+    display: flex;
+    align-items: flex-end;
+    gap: 25px;
+}
+
+.icon {
+    width: 30px;
+    cursor: pointer;
+}
+
+.padding {
+    margin: 4px;
+}
