@@ -3,3 +3,56 @@
     width: 100%;
     margin-top: 20px;
 }
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.active {
+    font-weight: 500;
+    font-size: 10px;
+    color: #606f89;
+    background: none;
+    border: 1px solid #606f89;
+    padding: 4px 5px;
+    cursor: pointer;
+    border-radius: 11px;
+}
+
+.inactive {
+    background: #0a65ff;
+    border-radius: 11px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #ffffff;
+    border: none;
+    padding: 4px 5px;
+    cursor: pointer;
+}
+
+.border-color-green {
+    border: 1px solid #3ced1a;
+}
+
+.number {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+}
+
+.color-red {
+    color: #e01a1a;
+}
+
+.color-green {
+    color: #008400;
+}
+
+.d-flex {
+    display: inline-grid;
+}
+
+.tdClass:nth-child(2n) {
+    background: #f4f7fc;
+}

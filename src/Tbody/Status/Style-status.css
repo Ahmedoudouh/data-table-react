@@ -1,0 +1,22 @@
+.active {
+    font-weight: 500;
+    font-size: 10px;
+    color: #606f89;
+    background: none;
+    border: 1px solid #606f89;
+    padding: 4px 5px;
+    cursor: pointer;
+    border-radius: 11px;
+}
+
+.inactive {
+    background: #0a65ff;
+    border-radius: 11px;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #ffffff;
+    border: none;
+    padding: 4px 5px;
+    cursor: pointer;
+}

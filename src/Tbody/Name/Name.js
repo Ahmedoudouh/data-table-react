@@ -1,10 +1,11 @@
 import React from "react";
 import "./Style-name.css";
-
-function Name() {
+export const Name=({name})=>{
     return (
-        <div> <span className = "customr-name">Ahmed</span></div>
-       
+        <div>
+            <span className="customr-name">{name}</span>
+        </div>
+
     );
 }
 export default Name;

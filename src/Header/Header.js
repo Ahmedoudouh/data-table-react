@@ -4,7 +4,7 @@ import "./Style-Header.css";
 function Header() {
   return (
     <div>
-        <div className="group-icon">
+        <div className="group-icon bg">
             <div className="icons">
                 <div>
                     <img className="icon padding" id="combinedSort" src="Images/menu.png" />

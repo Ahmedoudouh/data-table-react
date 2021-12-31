@@ -1,0 +1,16 @@
+.group-customr-b {
+    display: inline-grid;
+}
+
+.number {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: right;
+}
+
+.inr {
+    font-size: 12px;
+    line-height: 15px;
+    color: #606f89;
+    text-align: end;
+}
