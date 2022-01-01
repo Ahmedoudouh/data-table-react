@@ -12,6 +12,7 @@ import Deposit from "../Tbody/Deposit/Deposit.js";
 import Status from "../Tbody/Status/Status.js";
 import Icon from "../Tbody/Icon/Icon.js";
 import Inr from "../Tbody/Inr/Inr.js";
+import Footer from "../Footer/Footer.js";
 let customers = [{
     name: "Kadin Herwitz",
     number: 1629890939,
@@ -291,6 +292,7 @@ let customers = [{
 }];
 function Table() {
     return (
+        <div>
         <table className="table">
             <Informations />
             <tbody className="bg-white" id="mytbody">
@@ -338,7 +340,10 @@ function Table() {
                         </tr>)
                 })}
             </tbody>
-        </table>
+           
+        </table> 
+        <Footer/>
+        </div>
     );
 }
 export default Table;

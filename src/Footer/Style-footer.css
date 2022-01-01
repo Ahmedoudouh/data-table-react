@@ -1,0 +1,23 @@
+.content {
+    max-width: 1020px;
+    margin: 0 auto;
+}
+
+.footer {
+    color: #606f89;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.group-footer {
+    display: inherit;
+    grid-gap: 50px;
+    align-items: baseline;
+}
+
+.group-arrow-3 {
+    display: flex;
+    grid-gap: 50px;
+}
