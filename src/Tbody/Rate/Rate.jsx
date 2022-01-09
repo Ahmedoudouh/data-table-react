@@ -1,6 +1,4 @@
-import React from "react";
 import "./Style-rate.css";
-
 
 export const Rate=({rate,inr})=>{
     return (
