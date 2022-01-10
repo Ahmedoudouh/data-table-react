@@ -11,22 +11,24 @@ import Inr from "./Inr/Inr.jsx";
 import "./Style-tbody.css";
 
 export const Tbody = ({ arrayCustomers, setcustomersList }) => {
-
+  /*
     const deleteC = (customerId) => {
         const newArray = [...arrayCustomers]
         const index = arrayCustomers.findIndex(customer => {
-            customer.id === customerId
+            customer.number === customerId
         })
         newArray.splice(index, 1)
+      
         setcustomersList(newArray)
+      
     }
-
+  */
     return (
         <tbody className="bg-white" id="mytbody">
             {
                 arrayCustomers.map((customer) =>
                 (
-                    <tr className="tdClass array">
+                    <tr className="tdClass array" key={customer.number}>
                         <td className="td">
                             <Checkbox />
                         </td>
@@ -65,7 +67,7 @@ export const Tbody = ({ arrayCustomers, setcustomersList }) => {
                                 status={customer.status} />
                         </td>
                         <td className="td">
-                            <Icon array={arrayCustomers} deleteWhenClick={deleteC} />
+                            <Icon array={arrayCustomers} /*deleteWhenClick={deleteC}*/ />
                         </td>
                     </tr>
                 )

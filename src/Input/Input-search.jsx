@@ -19,7 +19,6 @@ export const Input = ({ filteredFunction, arrayOriginal }) => {
     setsearch(e.target.value);
     filteredFunction(filteredPersons)
   };
-
   return (
     <div>
       <div className="group-search">

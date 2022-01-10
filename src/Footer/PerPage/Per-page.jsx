@@ -1,19 +1,28 @@
+import React, { useState } from "react";
 import "./Style-Per-page.css";
+export const PerPage = ({ array, render }) => {
 
-function PerPage() {
+    const [selectValue, setselectValue] = useState()
+    let copieArr=[...array].slice(0, selectValue)
+    const selectValueRows = e => {
+        setselectValue(e.target.value)
+        render(copieArr)
+    };
+    
+    console.log(selectValue)
+    //console.log(array)
     return (
         <div>
             <span className="style-word">
                 Rows per page:
-                <select id="select"  className="style-select">
-                    <option value="5" >5</option>
+                <select onChange={selectValueRows} id="select" className="style-select" >
                     <option value="10">10</option>
                     <option value="15">15</option>
                     <option value="20">20</option>
                     <option value="25">25</option>
                 </select>
             </span>
-        </div>
+        </div >
     );
 }
 export default PerPage;

@@ -272,14 +272,15 @@ function App() {
     protect: "unlock",
     select: "unchecked",
   }];
-
+  
   const [customersList, setcustomersList] = useState(customers)
-
   return (
+    
     <div>
-      <Header array={customersList} arrayOriginal={customers} search={setcustomersList} />
+      
+      <Header  arrayOriginal={customers} search={setcustomersList} />
       <Table array={customersList} setcustomersList={setcustomersList} />
-      <Footer array={customersList} />
+      <Footer array={customersList } render={setcustomersList}/>
     </div>
   );
 }
