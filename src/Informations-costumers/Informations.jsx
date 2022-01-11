@@ -1,6 +1,38 @@
 import "./Style-Informations.css";
+import React, { useState } from "react";
 
-function Informations() {
+export const Informations = ({ arraySort, functionSort }) => {
+    let orderName = "undefined";
+    const [sort, setsort] = useState("")
+    let copy = [...arraySort].sort((a, b) => {
+        if (sort === "ascending") {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                return -1
+            }
+            return 0
+        }
+        if (sort === "descending") {
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                return -1
+            }
+            return 0
+        }
+    })
+
+    const clickSort = e => {
+        if (e.target.id == "descending") {
+            orderName = "ascending";
+        }
+        if (e.target.id == "ascending") {
+            orderName = "descending";
+        }
+        if (e.target.id == "undefined") {
+            orderName = "undefined";
+        }
+        console.log(setsort(orderName));
+        functionSort(copy)
+    };
+
     return (
         <thead>
             <tr className="background-table-row-1">
@@ -9,7 +41,7 @@ function Informations() {
                 </td>
                 <td className="td">
                     <div className="group-checkbox">
-                        <div className="group-customer-arrow"><span className="customer" id="name-customer">NAME</span>
+                        <div className="group-customer-arrow"><span onClick={clickSort} className="customer cursor" id="name-customer">NAME</span>
                             <div className="group-arrow">
                                 <div className="arrow-up" id="arrow-up"></div>
                                 <div id="arrow-down" className="arrow-down"></div>
@@ -41,4 +73,5 @@ function Informations() {
         </thead>
     );
 }
+
 export default Informations;

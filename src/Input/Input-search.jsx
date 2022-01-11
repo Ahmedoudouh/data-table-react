@@ -1,15 +1,16 @@
 import "./Style-input.css"
 import { useState } from "react";
 
-export const Input = ({ filteredFunction, arrayOriginal }) => {
+export const Input = ({ filteredFunction, customers }) => {
 
   const [search, setsearch] = useState("")
 
-  const filteredPersons = arrayOriginal.filter(
+  const filteredPersons = customers.filter(
     customer => {
       return (
-        customer.name.toLowerCase().includes(search.toLowerCase()) &&
-        customer.description.toLowerCase().includes(search.toLowerCase())
+        customer.name.toLowerCase().includes(search.toLowerCase()) ||
+        customer.description.toLowerCase().includes(search.toLowerCase())||
+        customer.number.toString().toLowerCase().includes(search.toLowerCase())
       );
     }
 

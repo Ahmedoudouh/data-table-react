@@ -34,6 +34,10 @@ td {
     color: #606f89;
 }
 
+.cursor {
+    cursor: pointer;
+}
+
 .group-arrow {
     display: grid;
     grid-gap: 1px;

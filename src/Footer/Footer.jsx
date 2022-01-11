@@ -5,15 +5,12 @@ import PerPage from "./PerPage/Per-page.jsx"
 import NextPage from "./NextPage/Next-page.jsx"
 import PreviousPage from "./PreviousPage/Previous-page.jsx"
 
-export const Footer = ({ array,render }) => {
-
- 
-
+export const Footer = ({ array,setCustomersList }) => {
     return (
         <footer className="content footer">
             <Active ActiveCustomers={array} />
             <div className="group-footer">
-                <PerPage array={array}  render={render} />
+                <PerPage array={array}  setCustomersList={setCustomersList} />
                 <div className="style-grid-gap">
                     <span id="count-page" className="style-word">
                     </span>
