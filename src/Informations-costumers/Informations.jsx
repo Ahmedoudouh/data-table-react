@@ -1,37 +1,37 @@
 import "./Style-Informations.css";
 import React, { useState } from "react";
+let orderName = undefined;
 
 export const Informations = ({ arraySort, functionSort }) => {
-    let orderName = "undefined";
-    const [sort, setsort] = useState("")
-    let copy = [...arraySort].sort((a, b) => {
-        if (sort === "ascending") {
-            if (a.name.toLowerCase() < b.name.toLowerCase()) {
-                return -1
-            }
-            return 0
-        }
-        if (sort === "descending") {
-            if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                return -1
-            }
-            return 0
-        }
-    })
 
-    const clickSort = e => {
-        if (e.target.id == "descending") {
-            orderName = "ascending";
-        }
-        if (e.target.id == "ascending") {
-            orderName = "descending";
-        }
-        if (e.target.id == "undefined") {
-            orderName = "undefined";
-        }
-        console.log(setsort(orderName));
-        functionSort(copy)
-    };
+    const [sortName, setsort] = useState(orderName)
+
+    const clickSort = () => {
+
+        let sorted = [...arraySort].sort((a, b) => {
+            
+            var nameA = a.name.toUpperCase();
+            var nameB = b.name.toUpperCase();
+            if (sortName === undefined) {
+                setsort("ascending")
+                if (nameA.toLowerCase() < nameB.toLowerCase()) {
+                    return -1
+                } 
+            }
+            if (sortName === "ascending") {
+                setsort("descending");
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return -1
+                }
+            }
+            if (sortName === "descending") {
+                setsort(undefined);
+            }
+        })
+
+       functionSort(sorted)
+
+    }
 
     return (
         <thead>

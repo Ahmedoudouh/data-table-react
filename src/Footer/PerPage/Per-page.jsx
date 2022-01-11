@@ -8,7 +8,6 @@ export const PerPage = ({ array, setCustomersList }) => {
         setselectValue(e.target.value)
         setCustomersList(copieArr)
     };
-    console.log(selectValue)
     //console.log(array)
 
     return (
