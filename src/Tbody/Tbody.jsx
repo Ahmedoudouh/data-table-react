@@ -24,6 +24,7 @@ export const Tbody = ({ arrayCustomers, setCustomersList }) => {
     })
 
     return (
+       
         <tbody className="bg-white" id="mytbody">
             {
                 arrayCustomers.map((customer) =>

@@ -13,7 +13,6 @@ export const Input = ({ filteredFunction, customers }) => {
         customer.number.toString().toLowerCase().includes(search.toLowerCase())
       );
     }
-
   );
 
   const handleChange = e => {

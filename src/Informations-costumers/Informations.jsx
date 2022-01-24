@@ -1,13 +1,9 @@
 import "./Style-Informations.css";
 import React, { useState } from "react";
-let orderName = undefined;
-
+ 
 export const Informations = ({ arraySort, functionSort }) => {
-
-    const [sortName, setsort] = useState(orderName)
-
+    const [sortName, setsort] = useState(undefined)
     const clickSort = () => {
-
         let sorted = [...arraySort].sort((a, b) => {
             
             var nameA = a.name.toUpperCase();
@@ -17,16 +13,22 @@ export const Informations = ({ arraySort, functionSort }) => {
                 if (nameA.toLowerCase() < nameB.toLowerCase()) {
                     return -1
                 } 
+              console.log(sortName) 
             }
+             
             if (sortName === "ascending") {
                 setsort("descending");
                 if (a.name.toLowerCase() > b.name.toLowerCase()) {
                     return -1
                 }
+               console.log(sortName)
             }
+            
             if (sortName === "descending") {
                 setsort(undefined);
+                console.log(sortName)
             }
+            
         })
 
        functionSort(sorted)

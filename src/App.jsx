@@ -9,9 +9,9 @@ function App() {
   const [customersList, setCustomersList] = useState(data)
   return (
     <div>
-      <Header  customers={data} search={setCustomersList} />
+      <Header customers={data} search={setCustomersList} />
       <Table array={customersList} setCustomersList={setCustomersList} />
-      <Footer array={customersList } setCustomersList={setCustomersList}/>
+      <Footer array={customersList} setCustomersList={setCustomersList}/>
     </div>
   );
 }
