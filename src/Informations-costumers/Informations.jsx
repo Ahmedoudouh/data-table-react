@@ -1,39 +1,38 @@
 import "./Style-Informations.css";
-import React, { useState } from "react";
- 
-export const Informations = ({ arraySort, functionSort }) => {
-    const [sortName, setsort] = useState(undefined)
-    const clickSort = () => {
-        let sorted = [...arraySort].sort((a, b) => {
-            
-            var nameA = a.name.toUpperCase();
-            var nameB = b.name.toUpperCase();
-            if (sortName === undefined) {
-                setsort("ascending")
-                if (nameA.toLowerCase() < nameB.toLowerCase()) {
-                    return -1
-                } 
-              console.log(sortName) 
-            }
-             
-            if (sortName === "ascending") {
-                setsort("descending");
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                    return -1
-                }
-               console.log(sortName)
-            }
-            
-            if (sortName === "descending") {
-                setsort(undefined);
-                console.log(sortName)
-            }
-            
-        })
+import React, { useEffect, useState } from "react";
 
-       functionSort(sorted)
+export const Informations = ({ onChange,onChangeStatus }) => {
+    const [sortName, setsortName] = useState(undefined)
+    const [sortStatus, setsortStatus] = useState(undefined)
+    const clickSort = (e) => {
+        if (e.target.id == "name-customer") {
+            if (sortName === undefined) {
+                setsortName("ascending")
+            }
+            if (sortName === "ascending") {
+                setsortName("descending");
+            }
+            if (sortName === "descending") {
+                setsortName(undefined);
+            }
+        }
+        if (e.target.id == "customer-status") {
+            if (sortStatus === undefined) {
+                setsortStatus("ascending")
+            }
+            if (sortStatus === "ascending") {
+                setsortStatus("descending");
+            }
+            if (sortStatus === "descending") {
+                setsortStatus(undefined);
+            }
+        }
 
     }
+
+    useEffect(() => {
+        onChange(sortName,sortStatus)
+    }, [sortName,sortStatus])
 
     return (
         <thead>
@@ -57,7 +56,7 @@ export const Informations = ({ arraySort, functionSort }) => {
                 <td className="td"><span className="customer">DEPOSIT</span></td>
                 <td className="td">
                     <div className="group-customer-arrow">
-                        <span className="customer" id="customer-status">STATUS</span>
+                        <span className="customer" id="customer-status" onClick={clickSort}>STATUS</span>
                         <div className="group-arrow">
                             <div id="arrow-up-status" className="arrow-up"></div>
                             <div id="arrow-down-status" className="arrow-down focus"></div>

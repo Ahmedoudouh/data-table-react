@@ -3,10 +3,10 @@ import "./Style-table.css";
 import Informations from "../Informations-costumers/Informations.jsx";
 import Tbody from "../Tbody/Tbody.jsx";
 
-export const Table = ({ array,setCustomersList }) => {
+export const Table = ({ array,setCustomersList,handelSortChange }) => {
     return (
         <table className="table">
-            <Informations arraySort={array} functionSort={setCustomersList}/>
+            <Informations onChange={handelSortChange} />
             <Tbody arrayCustomers={array} setCustomersList={setCustomersList} />
         </table>
     );

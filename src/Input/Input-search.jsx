@@ -1,7 +1,7 @@
 import "./Style-input.css"
 import { useState } from "react";
 
-export const Input = ({ filteredFunction, customers }) => {
+export const Input = ({ filteredFunction, customers}) => {
 
   const [search, setsearch] = useState("")
 
