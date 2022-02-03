@@ -5,11 +5,12 @@ import Table from "./Table/Table";
 import Footer from "./Footer/Footer";
 import Form from "./Form/form";
 import data from "./data";
-
+let currentPage = 0;
+let rowsPage = 5;
 function App() {
   const [customersList, setCustomersList] = useState(data);
   const [sortedCustomers, setsortedCustomers] = useState(data);
-  console.log(sortedCustomers);
+
   const handelSortChange = (sortName, sortStatus) => {
     let sorted = [...customersList].sort((a, b) => {
       var nameA = a.name.toUpperCase();
@@ -49,7 +50,6 @@ function App() {
     });
   }
   const handelSearchChange = (searchValue) => {
-    console.log(searchValue)
     const filteredCustomers = customersList.filter((customer) => {
       return (
         customer.name.toLowerCase().includes(searchValue.toLowerCase()) ||
@@ -65,6 +65,25 @@ function App() {
     setsortedCustomers(filteredCustomers);
   };
 
+  const handleselectValueRows = (selectValue) => {
+    rowsPage = selectValue;
+    //let copieArr = customersList.slice(0, selectValue)
+    let copieArr = customersList.slice(
+      currentPage * selectValue,
+      (currentPage + 1) * selectValue
+    );
+    setsortedCustomers(copieArr);
+  };
+  let countPage = `${currentPage * rowsPage + 1} - ${
+    sortedCustomers.length - rowsPage + (currentPage + 1) * rowsPage
+  } of ${sortedCustomers.length} `;
+  const handleclickNextPage = () => {
+    var calcul = Math.ceil(customersList.length / rowsPage);
+    if (currentPage + 1 < calcul) {
+      currentPage += 1;
+    }
+  };
+
   return (
     <div>
       <Form customers={customersList} onSubmit={handleSubmit} />
@@ -74,7 +93,13 @@ function App() {
         setCustomersList={setsortedCustomers}
         handelSortChange={handelSortChange}
       />
-      <Footer array={sortedCustomers} setCustomersList={setsortedCustomers} />
+      <Footer
+        array={sortedCustomers}
+        countPage={countPage}
+        setCustomersList={setsortedCustomers}
+        onChangeSelect={handleselectValueRows}
+        OnclickNextPage={handleclickNextPage}
+      />
     </div>
   );
 }
