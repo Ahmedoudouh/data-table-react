@@ -1,8 +1,8 @@
 import "./Style-input.css";
 
-export const Input = ({ onchange }) => {
+export const Input = ({ onSearchChange }) => {
   const handleChange = (e) => {
-    onchange(e.target.value);
+    onSearchChange(e.target.value);
   };
 
   return (

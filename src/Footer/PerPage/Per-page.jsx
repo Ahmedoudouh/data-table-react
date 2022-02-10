@@ -1,13 +1,8 @@
-import React, { useState, useEffect } from "react";
 import "./Style-Per-page.css";
 export const PerPage = ({ onChange }) => {
-  const [selectValue, setselectValue] = useState(5);
   const selectValueRows = (e) => {
-    setselectValue(e.target.value);
+    onChange(e.target.value);
   };
-  useEffect(() => {
-    onChange(selectValue);
-  }, [selectValue]);
 
   return (
     <div>

@@ -9,25 +9,15 @@ import Status from "./Status/Status.jsx";
 import Icon from "./Icon/Icon.jsx";
 import Inr from "./Inr/Inr.jsx";
 import "./Style-tbody.css";
-import { useState } from "react";
 
-export const Tbody = ({ arrayCustomers, setCustomersList }) => {
+export const Tbody = ({ customers,deleteWhenClick }) => {
 
-    const [deleteC, setdeleteC] = useState()
-    arrayCustomers.map(customer => {
-        if (customer.number === deleteC) {
-            const index = arrayCustomers.indexOf(customer)
-            console.log(index)
-            arrayCustomers.splice(index, 1)
-            console.log(arrayCustomers)
-        }
-    })
 
     return (
        
         <tbody className="bg-white" id="mytbody">
             {
-                arrayCustomers.map((customer) =>
+                customers.map((customer) =>
                 (
                     <tr className="tdClass array" key={customer.number}>
                         <td className="td">
@@ -68,7 +58,7 @@ export const Tbody = ({ arrayCustomers, setCustomersList }) => {
                                 status={customer.status} />
                         </td>
                         <td className="td">
-                            <Icon id={customer.number} deleteWhenClick={setdeleteC} />
+                            <Icon id={customer.number} deleteWhenClick={deleteWhenClick} />
                         </td>
                     </tr>
                 )

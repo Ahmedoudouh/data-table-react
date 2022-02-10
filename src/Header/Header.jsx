@@ -1,11 +1,11 @@
 import Input from "../Input/Input-search.jsx";
-import "./Style-Header.css";
-export const Header = ({ onSearchchange }) => {
+import "./style-header.css";
+export const Header = ({ onSearchChange }) => {
   return (
     <div className="margin">
       <div className="group-icon bg">
         <div className="icons">
-          <Input onchange={onSearchchange} />
+          <Input onSearchChange={onSearchChange} />
         </div>
       </div>
     </div>

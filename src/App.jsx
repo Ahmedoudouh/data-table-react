@@ -5,100 +5,89 @@ import Table from "./Table/Table";
 import Footer from "./Footer/Footer";
 import Form from "./Form/form";
 import data from "./data";
-let currentPage = 0;
-let rowsPage = 5;
+
 function App() {
   const [customersList, setCustomersList] = useState(data);
-  const [sortedCustomers, setsortedCustomers] = useState(data);
-
+  const [sort, setSort] = useState({ name: "", status: "" });
+  const [search, setSearch] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [deleteCustomer, setDeleteCustomer] = useState()
+  
   const handelSortChange = (sortName, sortStatus) => {
-    let sorted = [...customersList].sort((a, b) => {
-      var nameA = a.name.toUpperCase();
-      var nameB = b.name.toUpperCase();
-      if (sortName === "ascending") {
-        if (nameA < nameB) {
-          return -1;
-        }
-      }
-      if (sortName === "descending") {
-        if (nameA > nameB) {
-          return -1;
-        }
-      }
-      if (sortStatus === "ascending") {
-        if (a.status < b.status) {
-          return -1;
-        }
-        return 0;
-      }
-      if (sortStatus === "descending") {
-        if (a.status > b.status) {
-          return -1;
-        }
-        return 0;
-      }
-    });
-    setsortedCustomers(sorted);
-    console.log(sortStatus);
+    setSort({name: sortName, status: sortStatus});
   };
   function handleSubmit(formData) {
-    setsortedCustomers((prevArray) => {
-      return [formData, ...prevArray];
-    });
     setCustomersList((prevArray) => {
       return [formData, ...prevArray];
     });
   }
-  const handelSearchChange = (searchValue) => {
-    const filteredCustomers = customersList.filter((customer) => {
-      return (
-        customer.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        customer.description
-          .toLowerCase()
-          .includes(searchValue.toLowerCase()) ||
-        customer.number
-          .toString()
-          .toLowerCase()
-          .includes(searchValue.toLowerCase())
-      );
-    });
-    setsortedCustomers(filteredCustomers);
-  };
-
-  const handleselectValueRows = (selectValue) => {
-    rowsPage = selectValue;
-    //let copieArr = customersList.slice(0, selectValue)
-    let copieArr = customersList.slice(
-      currentPage * selectValue,
-      (currentPage + 1) * selectValue
+  const customerToReander = [...customersList]
+   .sort((a, b) => {
+    var nameA = a.name.toUpperCase();
+    var nameB = b.name.toUpperCase();
+    if (sort.name === "ascending") {
+      if (nameA < nameB) {
+        return -1;
+      }
+    }
+    if (sort.name === "descending") {
+      if (nameA > nameB) {
+        return -1;
+      }
+    }
+    if (sort.status === "ascending") {
+      if (a.status < b.status) {
+        return -1;
+      }
+      return 0;
+    }
+    if (sort.status === "descending") {
+      if (a.status > b.status) {
+        return -1;
+      }
+      return 0;
+    }
+  })
+.filter((customer) => {
+    return (
+      customer.name.toLowerCase().includes(search.toLowerCase()) ||
+      customer.description.toLowerCase().includes(search.toLowerCase()) ||
+      customer.number.toString().toLowerCase().includes(search.toLowerCase())
     );
-    setsortedCustomers(copieArr);
-  };
-  let countPage = `${currentPage * rowsPage + 1} - ${
-    sortedCustomers.length - rowsPage + (currentPage + 1) * rowsPage
-  } of ${sortedCustomers.length} `;
+  })
+  .slice(currentPage * rowsPerPage,(currentPage + 1) * rowsPerPage);
+  const countPage = `${currentPage * rowsPerPage + 1} - ${customerToReander.length - rowsPerPage + (currentPage + 1) * rowsPerPage} of ${customerToReander.length} `;
+
   const handleclickNextPage = () => {
-    var calcul = Math.ceil(customersList.length / rowsPage);
-    if (currentPage + 1 < calcul) {
-      currentPage += 1;
+    var result = Math.ceil(customersList.length / rowsPerPage);
+    if (currentPage + 1 < result ) {
+      setCurrentPage(currentPage + 1)
     }
   };
+
+  customersList.map((customer) => {
+    console.log(deleteCustomer)
+     if(customer.number === deleteCustomer){
+     const index = customersList.indexOf(customer)
+    customersList.splice(index, 1)
+     } 
+  });
 
   return (
     <div>
       <Form customers={customersList} onSubmit={handleSubmit} />
-      <Header onSearchchange={handelSearchChange} />
+      <Header onSearchChange={setSearch} />
       <Table
-        array={sortedCustomers}
-        setCustomersList={setsortedCustomers}
+        customers={customerToReander}
+        deleteWhenClick={setDeleteCustomer}
         handelSortChange={handelSortChange}
       />
       <Footer
-        array={sortedCustomers}
+        allCustomers={customersList}
         countPage={countPage}
-        setCustomersList={setsortedCustomers}
-        onChangeSelect={handleselectValueRows}
-        OnclickNextPage={handleclickNextPage}
+        onChangeSelect={setRowsPerPage}
+        onclickNextPage={handleclickNextPage}
       />
     </div>
   );
