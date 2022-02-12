@@ -75,3 +75,7 @@ td {
 .d-flex {
     display: inline-grid;
 }
+
+.icons-style {
+    display: flex;
+}

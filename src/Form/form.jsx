@@ -4,12 +4,11 @@ import Input from "./inputs-form";
 import { useEffect, useState } from "react";
 import "./form.css";
 
-var error = {};
-
-export const Form = ({ customers, onSubmit }) => {
+export const Form = ({ customers, onSubmit,filteredEdit }) => {
+console.log(filteredEdit)
   const [errorvalue, setErrorvalue] = useState({});
   const [formData, setFormdata] = useState({
-    name: "",
+    name:"",
     number: "",
     description: "",
     rate: "",
@@ -20,7 +19,6 @@ export const Form = ({ customers, onSubmit }) => {
   });
   function handlechangeName(event) {
     setFormdata((prevFromdata) => {
-      setErrorvalue(error);
       return {
         ...prevFromdata,
         [event.target.name]: event.target.value,
@@ -86,16 +84,7 @@ export const Form = ({ customers, onSubmit }) => {
 
   function handlSubmit(event) {
     event.preventDefault();
-    if (
-      errorvalue.name == true &&
-      errorvalue.number == true &&
-      errorvalue.description == true &&
-      errorvalue.rate == true &&
-      errorvalue.inr == true &&
-      errorvalue.balance == true &&
-      errorvalue.deposit == true &&
-      errorvalue.status == true
-    ) {
+    if (Object.values(errorvalue).every((error) => error === true)) {
       onSubmit(formData);
       setFormdata({
         name: "",
@@ -108,96 +97,115 @@ export const Form = ({ customers, onSubmit }) => {
         status: "",
       });
     } else {
-      error.name = "name is required !";
-      error.number = "number is required !";
-      error.description = "description is required !";
-      error.rate = "rate is required !";
-      error.inr = "currency is required !";
-      error.balance = "balance is required !";
-      error.deposit = "deposit is required !";
-      error.status = "status is required !";
+      setErrorvalue((prevErros) => ({
+        ...prevErros,
+        name: "name is required !",
+        number: "number is required !",
+        description: "description is required !",
+        rate: "rate is required !",
+        balance: "balance is required !",
+        deposit: "deposit is required !",
+        status: "status is required !",
+        inr: "rate is required !",
+      }));
     }
-    setErrorvalue(error);
   }
-
   useEffect(() => {
+    let errorName = "";
     if (!formData.name.match("[a-z A-Z]+$")) {
-      error.name = "customer name must be string";
+      errorName = "customer name must be string";
     } else {
-      error.name = true;
+      errorName = true;
     }
     if (!formData.name) {
-      error.name = "name is required !";
+      errorName = "name is required !";
     }
     const customerExist = customers.some((customer) => {
       return customer.name === formData.name;
     });
     if (customerExist) {
-      error.name = "customer name already exists";
+      errorName = "customer name already exists";
     }
     //
+    let errorNumber = "";
     if (formData.number.match("^[a-z A-Z]+$")) {
-      error.number = "customer number must be number!";
+      errorNumber = "customer number must be number!";
     } else {
-      error.number = true;
+      errorNumber = true;
     }
     if (!formData.number) {
-      error.number = "number is required !";
+      errorNumber = "number is required !";
     }
     customers.forEach((customer) => {
       if (customer.number == formData.number) {
-        error.number = "customer number already exists";
+        errorNumber = "customer number already exists";
       }
     });
     //
+    let errorDescription = "";
     if (formData.description.length < 10) {
-      error.description = "description should have 10 characters!";
+      errorDescription = "description should have 10 characters!";
     } else {
-      error.description = true;
+      errorDescription = true;
     }
     if (!formData.description) {
-      error.description = "description is required!";
+      errorDescription = "description is required!";
     }
     //
+    let erroRrate = "";
     if (formData.rate.match("^[a-z A-Z]+$")) {
-      error.rate = "customer rate must be number!";
+      erroRrate = "customer rate must be number!";
     } else {
-      error.rate = true;
+      erroRrate = true;
     }
     if (!formData.rate) {
-      error.rate = "rate is required!";
+      erroRrate = "rate is required!";
     }
     //
+    let errorBalance = "";
     if (formData.balance.match("^[a-z A-Z]+$")) {
-      error.balance = "customer rate must be number!";
+      errorBalance = "customer rate must be number!";
     } else {
-      error.balance = true;
+      errorBalance = true;
     }
     if (!formData.balance) {
-      error.balance = "balance is required!";
+      errorBalance = "balance is required!";
     }
     //
+    let errorDeposit = "";
     if (formData.deposit.match("^[a-z A-Z]+$")) {
-      error.deposit = "customer deposit must be number!";
+      errorDeposit = "customer deposit must be number!";
     } else {
-      error.deposit = true;
+      errorDeposit = true;
     }
     if (!formData.deposit) {
-      error.deposit = "deposit is required!";
+      errorDeposit = "deposit is required!";
     }
     //
+    let errorStatus = "";
     if (formData.status === "status") {
-      error.status = "status is required!";
+      errorStatus = "status is required!";
     } else {
-      error.status = true;
+      errorStatus = true;
     }
     //
+    let errorCurrency = "";
     if (formData.inr === "currency") {
-      error.inr = "currency is required!";
+      errorCurrency = "currency is required!";
     } else {
-      error.inr = true;
+      errorCurrency = true;
     }
-    setErrorvalue({ ...error });
+    setErrorvalue((prevErros) => ({
+      ...prevErros,
+      name: errorName,
+      number: errorNumber,
+      description: errorDescription,
+      rate: erroRrate,
+      balance: errorBalance,
+      deposit: errorDeposit,
+      status: errorStatus,
+      inr: errorCurrency,
+    }));
   }, [
     formData.name,
     formData.number,
@@ -209,10 +217,26 @@ export const Form = ({ customers, onSubmit }) => {
     formData.inr,
     customers,
   ]);
-
+  
+  /*
+  useEffect(() => {
+    setFormdata((prevErros) => ({
+        ...prevErros,
+        name: filteredEdit.name,
+        number: filteredEdit.number,
+        description: filteredEdit.description,
+        rate: filteredEdit.rate,
+        balance: filteredEdit.balance,
+        deposit: filteredEdit.deposit,
+        status: filteredEdit.status,
+        inr: filteredEdit.inr,
+      }));
+  }, [filteredEdit]);
+  */
+  
   return (
     <div>
-      <form onSubmit={handlSubmit} id="form" className="style-add-customer">
+      <form onSubmit={handlSubmit}  id="form" className="style-add-customer">
         <p className="title">Add customer :</p>
         <Input
           onChange={handlechangeName}

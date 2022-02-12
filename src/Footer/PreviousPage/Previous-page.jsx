@@ -1,9 +1,9 @@
 import "./Style-Previous-page.css";
 
-function PreviousPage() {
+function PreviousPage({onClickPreviousPage}) {
     return (
         <a>
-            <i id="arrow-left" className="arrow"></i>
+            <i id="arrow-left" className="arrow" onClick={onClickPreviousPage}></i>
         </a>
     );
 }

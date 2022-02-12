@@ -5,7 +5,7 @@ import PerPage from "./PerPage/Per-page.jsx"
 import NextPage from "./NextPage/Next-page.jsx"
 import PreviousPage from "./PreviousPage/Previous-page.jsx"
 
-export const Footer = ({ allCustomers,onChangeSelect ,onclickNextPage,countPage}) => {
+export const Footer = ({ allCustomers,onChangeSelect ,onClickNextPage,countPage,onClickPreviousPage}) => {
     return (
         <footer className="content footer">
             <Active allCustomers={allCustomers} />
@@ -17,8 +17,8 @@ export const Footer = ({ allCustomers,onChangeSelect ,onclickNextPage,countPage}
                     </span>
                 </div>
                 <div className="group-arrow-3">
-                    <PreviousPage />
-                    <NextPage Onclick={onclickNextPage}/>
+                    <PreviousPage onClickPreviousPage={onClickPreviousPage}/>
+                    <NextPage onclick={onClickNextPage}/>
                 </div>
             </div>
         </footer>

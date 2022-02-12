@@ -1,15 +1,12 @@
 import "./Style-icon.css";
 
-export const Icon = ({ deleteWhenClick, id }) => {
-  const clickDelete = (e) => {
-    deleteWhenClick(e.target.id);
-  };
+export const Icon = ({ deleteWhenClick }) => {
+
   return (
     <div>
       <img
-        onClick={clickDelete}
+        onClick={deleteWhenClick}
         className="icon padding"
-        id={id}
         src="Images/trash.png"
       />
     </div>
