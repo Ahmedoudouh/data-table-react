@@ -18,16 +18,39 @@ function App() {
   const [search, setSearch] = useState("");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(0);
+  const [filteredEdit, setFilteredEdit] = useState({border:"d"});
+  const [submit, setSubmit] = useState();
+  const [index, setIndex] = useState();
 
   const handelSortChange = (sortName, sortStatus) => {
     setSort({ name: sortName, status: sortStatus });
   };
 
   function handleSubmit(formData) {
-    setCustomersList((prevArray) => {
-      return [formData, ...prevArray];
-    });
+    if (submit === true) {
+      customersList.splice(index, 1, formData);
+      setCustomersList([...customersList]);
+      setSubmit(false);
+      window.scrollTo(0, 1000);
+    } else {
+      setCustomersList((prevArray) => {
+        return [formData, ...prevArray];
+      });
+      window.scrollTo(0, 1000);
+      /*
+      setTimeout(() => {
+        setFormdata((formData) => {
+          console.log(formData)
+          return { ...formData, border:false};
+        })
+      }, 3000);
+      */
+    }
   }
+
+  useEffect(() => {
+    setCustomersList(customersList);
+  }, [customersList]);
   const customerToReander = [...customersList]
     .sort((a, b) => {
       var nameA = a.name.toUpperCase();
@@ -80,22 +103,36 @@ function App() {
 
   function deleteCustomer(id) {
     let filtered = customersList.filter((customer) => customer.number != id);
-    console.log(filtered);
-    setCustomersList(filtered);
+    if (window.confirm("Are you sure you want to delete")) {
+      setCustomersList(filtered);
+    }
   }
 
-  const [filteredEdit, setFilteredEdit] = useState();
   function editCustomer(id) {
-    let filteredEditCustomers = customersList.filter((customer) => customer.number === id);
-    setFilteredEdit(filteredEditCustomers[0])
+    let filteredEditCustomers = customersList.filter(
+      (customer) => customer.number === id
+    );
+    window.scrollTo(1000, 0);
+    setSubmit(true);
+    setFilteredEdit(filteredEditCustomers[0]);
+    setFilteredEdit((formData) => {
+      return { ...formData, border:"d"};
+    })
+    setIndex(customersList.indexOf(filteredEditCustomers[0]));
   }
+
   useEffect(() => {
     localStorage.setItem("local", JSON.stringify(customersList));
   }, [customersList]);
 
   return (
     <div>
-      <Form customers={customersList} onSubmit={handleSubmit} filteredEdit={filteredEdit}/>
+      <Form
+        customers={customersList}
+        onSubmit={handleSubmit}
+        filteredEdit={filteredEdit}
+        index={index}
+      />
       <Header onSearchChange={setSearch} />
       <Table
         customers={customerToReander}

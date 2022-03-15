@@ -72,3 +72,19 @@ td {
 .apdding-left {
     padding-left: 45px;
 }
+
+.ascending {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid #0a0a0a87;
+}
+
+.descending {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #0a0a0a87;
+}

@@ -1,22 +1,38 @@
 import Status from "./Status.jsx";
+import {
+  selectCheck,
+  matchNumber,
+  required,
+  description,
+  matchString,
+  alreadyExistsName,
+  alreadyExistsNumber,
+} from "./utils.js";
 import Currency from "./Currency.jsx";
 import Input from "./inputs-form";
 import { useEffect, useState } from "react";
 import "./form.css";
 
-export const Form = ({ customers, onSubmit,filteredEdit }) => {
-console.log(filteredEdit)
+export const Form = ({
+  customers,
+  onSubmit,
+  filteredEdit,
+  index,
+}) => {
   const [errorvalue, setErrorvalue] = useState({});
+  const [chekSubmit, setChekSubmit] = useState(false);
   const [formData, setFormdata] = useState({
-    name:"",
-    number: "",
-    description: "",
-    rate: "",
-    inr: "",
-    balance: "",
-    deposit: "",
-    status: "",
+    name: undefined,
+    number: undefined,
+    description: undefined,
+    rate: undefined,
+    inr: undefined,
+    balance: undefined,
+    deposit: undefined,
+    status: undefined,
+    border: true,
   });
+
   function handlechangeName(event) {
     setFormdata((prevFromdata) => {
       return {
@@ -81,11 +97,29 @@ console.log(filteredEdit)
       };
     });
   }
+  const [edit, setEdit] = useState();
+  function editCustomer(filteredEdit) {
+    if (filteredEdit !== undefined) {
+      setFormdata(filteredEdit);
+      let copyCustomers = customers.slice();
+      let filltredEleme = copyCustomers.filter(
+        (customer) => customers.indexOf(customer) != index
+      );
+      setEdit(filltredEleme);
+    }
+  }
+  useEffect(() => {
+    setChekSubmit(chekSubmit);
+  }, [chekSubmit]);
+  useEffect(() => {
+    editCustomer(filteredEdit);
+  }, [filteredEdit]);
 
   function handlSubmit(event) {
     event.preventDefault();
     if (Object.values(errorvalue).every((error) => error === true)) {
-      onSubmit(formData);
+      setChekSubmit(false);
+      onSubmit(formData,setFormdata);
       setFormdata({
         name: "",
         number: "",
@@ -97,146 +131,135 @@ console.log(filteredEdit)
         status: "",
       });
     } else {
+      setChekSubmit(true);
+    }
+  }
+
+  function checkCustomer(formData) {
+    if (
+      Object.values(formData).every((value) => value == "") &&
+      chekSubmit === false
+    ) {
+      setFormdata({
+        name: undefined,
+        number: undefined,
+        description: undefined,
+        rate: undefined,
+        inr: undefined,
+        balance: undefined,
+        deposit: undefined,
+        status: undefined,
+        border:true,
+      });
+    }
+    if (chekSubmit) {
+      setFormdata({
+        name: "",
+        number: "",
+        description: "",
+        rate: "",
+        inr: "currency",
+        balance: "",
+        deposit: "",
+        status: "status",
+      });
+      setChekSubmit(false);
+    } else {
+      let errorName = "";
+      if (formData.name != undefined) {
+        errorName = matchString(formData.name, "name");
+        if (formData.name == "") {
+          errorName = required(formData.name, "name");
+        }
+        let customerExist = alreadyExistsName(customers, formData.name, "name");
+        if (edit !== undefined) {
+          customerExist = alreadyExistsName(edit, formData.name);
+        }
+        if (customerExist) {
+          errorName = "customer name already exists";
+        }
+      }
+      //
+      let errorNumber = "";
+      if (formData.number != undefined) {
+        errorNumber = matchNumber(formData.number, "number");
+        if (formData.number == "") {
+          errorNumber = required(formData.number, "number");
+        }
+        let customerExist = alreadyExistsNumber(customers, formData.number);
+        if (edit !== undefined) {
+          customerExist = alreadyExistsNumber(edit, formData.number);
+        }
+        if (customerExist) {
+          errorNumber = "customer number already exists";
+        }
+      }
+      //
+      let errorDescription = "";
+      if (formData.description != undefined) {
+        errorDescription = description(formData.description.length);
+        if (formData.description == "") {
+          errorDescription = required(formData.description, "description");
+        }
+      }
+      //
+      let erroRrate = "";
+      if (formData.rate != undefined) {
+        erroRrate = matchNumber(formData.rate, "rate");
+        if (formData.rate == "") {
+          erroRrate = required(formData.rate, "rate");
+        }
+      }
+      //
+      let errorBalance = "";
+      if (formData.balance != undefined) {
+        errorBalance = matchNumber(formData.balance, "balance");
+        if (formData.balance == "") {
+          errorBalance = required(formData.balance, "balance");
+        }
+      }
+      //
+      let errorDeposit = "";
+      if (formData.deposit != undefined) {
+        errorDeposit = matchNumber(formData.deposit, "deposit");
+        if (formData.deposit == "") {
+          errorDeposit = required(formData.deposit, "deposit");
+        }
+      }
+      //
+      let errorStatus = "";
+      if (formData.status != undefined) {
+        errorStatus = selectCheck(formData.status, "status");
+      }
+      //
+      let errorCurrency = "";
+      if (formData.inr != undefined) {
+        errorCurrency = selectCheck(formData.inr, "currency");
+      }
       setErrorvalue((prevErros) => ({
         ...prevErros,
-        name: "name is required !",
-        number: "number is required !",
-        description: "description is required !",
-        rate: "rate is required !",
-        balance: "balance is required !",
-        deposit: "deposit is required !",
-        status: "status is required !",
-        inr: "rate is required !",
+        name: errorName,
+        number: errorNumber,
+        description: errorDescription,
+        rate: erroRrate,
+        balance: errorBalance,
+        deposit: errorDeposit,
+        status: errorStatus,
+        inr: errorCurrency,
       }));
     }
   }
   useEffect(() => {
-    let errorName = "";
-    if (!formData.name.match("[a-z A-Z]+$")) {
-      errorName = "customer name must be string";
-    } else {
-      errorName = true;
-    }
-    if (!formData.name) {
-      errorName = "name is required !";
-    }
-    const customerExist = customers.some((customer) => {
-      return customer.name === formData.name;
-    });
-    if (customerExist) {
-      errorName = "customer name already exists";
-    }
-    //
-    let errorNumber = "";
-    if (formData.number.match("^[a-z A-Z]+$")) {
-      errorNumber = "customer number must be number!";
-    } else {
-      errorNumber = true;
-    }
-    if (!formData.number) {
-      errorNumber = "number is required !";
-    }
-    customers.forEach((customer) => {
-      if (customer.number == formData.number) {
-        errorNumber = "customer number already exists";
-      }
-    });
-    //
-    let errorDescription = "";
-    if (formData.description.length < 10) {
-      errorDescription = "description should have 10 characters!";
-    } else {
-      errorDescription = true;
-    }
-    if (!formData.description) {
-      errorDescription = "description is required!";
-    }
-    //
-    let erroRrate = "";
-    if (formData.rate.match("^[a-z A-Z]+$")) {
-      erroRrate = "customer rate must be number!";
-    } else {
-      erroRrate = true;
-    }
-    if (!formData.rate) {
-      erroRrate = "rate is required!";
-    }
-    //
-    let errorBalance = "";
-    if (formData.balance.match("^[a-z A-Z]+$")) {
-      errorBalance = "customer rate must be number!";
-    } else {
-      errorBalance = true;
-    }
-    if (!formData.balance) {
-      errorBalance = "balance is required!";
-    }
-    //
-    let errorDeposit = "";
-    if (formData.deposit.match("^[a-z A-Z]+$")) {
-      errorDeposit = "customer deposit must be number!";
-    } else {
-      errorDeposit = true;
-    }
-    if (!formData.deposit) {
-      errorDeposit = "deposit is required!";
-    }
-    //
-    let errorStatus = "";
-    if (formData.status === "status") {
-      errorStatus = "status is required!";
-    } else {
-      errorStatus = true;
-    }
-    //
-    let errorCurrency = "";
-    if (formData.inr === "currency") {
-      errorCurrency = "currency is required!";
-    } else {
-      errorCurrency = true;
-    }
-    setErrorvalue((prevErros) => ({
-      ...prevErros,
-      name: errorName,
-      number: errorNumber,
-      description: errorDescription,
-      rate: erroRrate,
-      balance: errorBalance,
-      deposit: errorDeposit,
-      status: errorStatus,
-      inr: errorCurrency,
-    }));
-  }, [
-    formData.name,
-    formData.number,
-    formData.description,
-    formData.rate,
-    formData.balance,
-    formData.deposit,
-    formData.status,
-    formData.inr,
-    customers,
-  ]);
-  
-  /*
-  useEffect(() => {
-    setFormdata((prevErros) => ({
-        ...prevErros,
-        name: filteredEdit.name,
-        number: filteredEdit.number,
-        description: filteredEdit.description,
-        rate: filteredEdit.rate,
-        balance: filteredEdit.balance,
-        deposit: filteredEdit.deposit,
-        status: filteredEdit.status,
-        inr: filteredEdit.inr,
-      }));
-  }, [filteredEdit]);
-  */
-  
+    checkCustomer(formData);
+  }, [formData, customers, chekSubmit]);
+
   return (
     <div>
-      <form onSubmit={handlSubmit}  id="form" className="style-add-customer">
+      <form
+        onSubmit={handlSubmit}
+        id="form"
+        className="style-add-customer"
+      >
         <p className="title">Add customer :</p>
         <Input
           onChange={handlechangeName}

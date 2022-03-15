@@ -6,7 +6,7 @@ import Tbody from "../Tbody/Tbody.jsx";
 export const Table = ({ customers,handelSortChange,deleteWhenClick,editWhenClick}) => {
     return (
         <table className="table">
-            <Informations onChange={handelSortChange} />
+            <Informations onChange={handelSortChange}  />
             <Tbody customers={customers} deleteWhenClick={deleteWhenClick} editWhenClick={editWhenClick}/>
         </table>
     );

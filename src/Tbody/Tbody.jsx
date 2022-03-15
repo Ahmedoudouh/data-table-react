@@ -10,14 +10,33 @@ import Icon from "./Icon/Icon";
 import IconEdit from "./icon-edit/icon-edit";
 import Inr from "./Inr/Inr";
 import "./Style-tbody.css";
+export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
+  setTimeout(() => {
+    customers.map((row) => {
+      if (row.border === true||row.border === "d") {
+        row.border = false;
+      }
+    });
+  }, 1000);
 
-export const Tbody = ({ customers, deleteWhenClick, editWhenClick }) => {
   return (
     <tbody className="bg-white" id="mytbody">
       {customers.map((customer) => (
-        <tr className="tdClass array" key={customer.number}>
+        <tr
+          className="tdClass array"
+        >
           <td className="td">
             <Checkbox />
+            <div className="new"
+                      key={customer.number}
+                      className={
+                        customer.border === true ? "newBlock" : "new"
+                      }>New</div>
+                                  <div className="new"
+                      key={customer.number}
+                      className={
+                        customer.border === "d" ? "newBlock" : "new"
+                      }>New edit</div>
           </td>
           <td className="td">
             <div className="group-customr">
@@ -70,7 +89,10 @@ export const Tbody = ({ customers, deleteWhenClick, editWhenClick }) => {
           <td className="td">
             <div className="icons-style">
               <Icon deleteWhenClick={() => deleteWhenClick(customer.number)} />
-              <IconEdit editWhenClick={() => editWhenClick(customer.number)} />
+              <IconEdit
+                index={index}
+                editWhenClick={() => editWhenClick(customer.number)}
+              />
             </div>
           </td>
         </tr>

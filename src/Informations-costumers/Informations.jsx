@@ -50,8 +50,14 @@ export const Informations = ({ onChange }) => {
                 NAME
               </span>
               <div className="group-arrow">
-                <div className="arrow-up" id="arrow-up"></div>
-                <div id="arrow-down" className="arrow-down"></div>
+                <div className={
+                  sortName==="ascending"
+                    ? "ascending":"arrow-up"
+                }></div>
+                <div className={
+                  sortName==="descending"
+                    ? "descending":"arrow-down"
+                }></div>
               </div>
             </div>
           </div>
@@ -74,8 +80,14 @@ export const Informations = ({ onChange }) => {
               STATUS
             </span>
             <div className="group-arrow">
-              <div id="arrow-up-status" className="arrow-up"></div>
-              <div id="arrow-down-status" className="arrow-down focus"></div>
+              <div id="arrow-up-status" className="arrow-up"className={
+                  sortStatus==="ascending"
+                    ? "ascending":"arrow-up"
+                }></div>
+              <div id="arrow-down-status" className="arrow-down focus"className={
+                  sortStatus==="descending"
+                    ? "descending":"arrow-down"
+                }></div>
             </div>
           </div>
         </td>
