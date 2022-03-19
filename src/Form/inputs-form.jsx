@@ -16,7 +16,6 @@ export const Input = ({
         onChange={onChange}
         value={valueData}
         name={name}
-        onChange={onChange}
         className="input-search padding-search-add-customer inputAdd"
         type={type}
         placeholder={name}

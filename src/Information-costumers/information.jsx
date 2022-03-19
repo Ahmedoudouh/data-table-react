@@ -85,14 +85,12 @@ export const Information = ({ onChange }) => {
             <div className="group-arrow">
               <div
                 id="arrow-up-status"
-                className="arrow-up"
                 className={
                   sortStatus === "ascending" ? "ascending" : "arrow-up"
                 }
               ></div>
               <div
                 id="arrow-down-status"
-                className="arrow-down focus"
                 className={
                   sortStatus === "descending" ? "descending" : "arrow-down"
                 }
