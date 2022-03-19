@@ -10,9 +10,10 @@ import Icon from "./Icon/Icon";
 import IconEdit from "./icon-edit/icon-edit";
 import Inr from "./Inr/Inr";
 import "./Style-tbody.css";
+
 export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
   setTimeout(() => {
-    customers.map((row) => {
+    customers.forEach((row) => {
       if (row.border === true||row.border === "d") {
         row.border = false;
       }
@@ -22,21 +23,9 @@ export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
   return (
     <tbody className="bg-white" id="mytbody">
       {customers.map((customer) => (
-        <tr
-          className="tdClass array"
-        >
+        <tr className="tdClass array">
           <td className="td">
             <Checkbox />
-            <div className="new"
-                      key={customer.number}
-                      className={
-                        customer.border === true ? "newBlock" : "new"
-                      }>New</div>
-                                  <div className="new"
-                      key={customer.number}
-                      className={
-                        customer.border === "d" ? "newBlock" : "new"
-                      }>New edit</div>
           </td>
           <td className="td">
             <div className="group-customr">
