@@ -1,0 +1,77 @@
+.style-add-customer {
+    display: grid;
+    grid-gap: 20px;
+    width: fit-content;
+    padding: 25px 20px;
+    border: 2px solid #606f89;
+    margin: 0 0 41px 41px;
+    border-radius: 15px;
+}
+
+.button {
+    display: flex;
+    justify-content: space-between;
+}
+
+.submit {
+    cursor: pointer;
+    background: #606f89;
+    border-radius: 4px;
+    border: none;
+    padding: 7px;
+    color: #dae1ec;
+    width: 65px;
+}
+
+.submit:focus {
+    background: #dae1ec;
+    color: #606f89;
+}
+
+.form-control {
+    display: inherit;
+}
+
+.group-add-customer {
+    display: inline-grid;
+}
+
+.input-search {
+    width: 300px;
+    background: #dae1ec;
+    border-radius: 4px;
+    border: none;
+}
+
+.padding-search-add-customer {
+    padding: 10px;
+}
+
+.error {
+    padding: 5px 0 0 10px;
+    font-size: 12px;
+    line-height: 15px;
+    color: #ff0c00;
+}
+
+.currency {
+    width: 87px;
+    background: #dae1ec;
+    border-radius: 4px;
+    border: none;
+    padding: 3px;
+    color: #606f89;
+}
+
+.active-inactive {
+    width: 90px;
+    background: #dae1ec;
+    border-radius: 4px;
+    border: none;
+    padding: 3px;
+    color: #606f89;
+}
+
+.margin {
+    padding-top: 50px;
+}

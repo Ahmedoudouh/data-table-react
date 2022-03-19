@@ -1,10 +1,9 @@
-import "./Style-deposit.css";
+import "./style-deposit.css";
 
 export const Deposit = ({ deposit }) => {
-    return (
-        <div className="group-customr-b">
-            <span className="number depositUpdate">{deposit}</span>
-        </div>
-    );
-}
-export default Deposit;
+  return (
+    <div className="group-customer-b">
+      <span className="number depositUpdate">{deposit}</span>
+    </div>
+  );
+};

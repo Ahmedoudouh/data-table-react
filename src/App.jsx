@@ -1,287 +1,155 @@
-import "./App.css";
-import React, { useState } from "react";
-import Header from "./Header/Header.jsx";
-import Table from "./Table/Table.jsx";
-import Footer from "./Footer/Footer.jsx";
+import React, { useEffect, useState } from "react";
+import { Header } from "./Header/header";
+import { Table } from "./Table/table";
+import { Footer } from "./Footer/footer";
+import { Form } from "./Form/form";
+import data from "./data";
+import "./app.css";
 
-function App() {
+export const App = () => {
+  if (localStorage.getItem("local") === null) {
+    localStorage.setItem("local", JSON.stringify(data));
+  }
 
-  let customers = [{
-    name: "Cristofer Korsgaard",
-    number: 1629890940,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "00.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Omar Workman",
-    number: 1629890941,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Ahmed Oudouh",
-    number: 1629890942,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Mira Dokidis",
-    number: 1629890943,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Jakob Bergson",
-    number: 1629890945,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Carter Rosser",
-    number: 1629890944,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "Miracle Septimus",
-    number: 1629890000,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "horya zdag",
-    number: 1629890946,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "csa lopa",
-    number: 1629890949,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "popiya olt",
-    number: 1629890950,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "sanaa docm",
-    number: 1629890951,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "xxxtination olm",
-    number: 5529890951,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "malak mala",
-    number: 1629890953,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "hala cpm",
-    number: 1688890953,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "folo son",
-    number: 1629890955,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "00.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "sonds mala",
-    number: 1629890956,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "wisla lca",
-    number: 1629890777,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "salah mbo",
-    number: 1629890957,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "fouad dauof",
-    number: 1629890959,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "salma sodo",
-    number: 1629890960,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "ACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "asai sdom",
-    number: 1629890973,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "-270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "malika xqa",
-    number: 1629890974,
-    description: "06132980",
-    rate: "70.00",
-    inr: "INR",
-    balance: "270.00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "hicham xdas",
-    number: 16298906,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "00,00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }, {
-    name: "sads xdas",
-    number: 1629890976,
-    description: "Lorem ipsum dolor sit amet, consectetur...",
-    rate: "70.00",
-    inr: "INR",
-    balance: "00,00",
-    deposit: "500.00",
-    status: "INACTIVE",
-    protect: "unlock",
-    select: "unchecked",
-  }];
+  const [customersList, setCustomersList] = useState(
+    JSON.parse(localStorage.getItem("local"))
+  );
 
-  const [customersList, setcustomersList] = useState(customers)
+  const [sort, setSort] = useState({ name: "", status: "" });
+  const [search, setSearch] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [filteredEdit, setFilteredEdit] = useState({ border: "d" });
+  const [submit, setSubmit] = useState();
+  const [index, setIndex] = useState();
+
+  const handelSortChange = (sortName, sortStatus) => {
+    setSort({ name: sortName, status: sortStatus });
+  };
+
+  function handleSubmit(formData) {
+    if (submit === true) {
+      customersList.splice(index, 1, formData);
+      setCustomersList([...customersList]);
+      setSubmit(false);
+      window.scrollTo(0, 1000);
+    } else {
+      setCustomersList((prevArray) => {
+        return [formData, ...prevArray];
+      });
+
+      window.scrollTo(0, 1000);
+    }
+  }
+
+  useEffect(() => {
+    setCustomersList(customersList);
+  }, [customersList]);
+
+  const customersToRender = [...customersList]
+    .sort((a, b) => {
+      var nameA = a.name.toUpperCase();
+      var nameB = b.name.toUpperCase();
+
+      if (sort.name === "ascending") {
+        if (nameA < nameB) {
+          return -1;
+        }
+      }
+
+      if (sort.name === "descending") {
+        if (nameA > nameB) {
+          return -1;
+        }
+      }
+
+      if (sort.status === "ascending") {
+        if (a.status < b.status) {
+          return -1;
+        }
+      }
+
+      if (sort.status === "descending") {
+        if (a.status > b.status) {
+          return -1;
+        }
+      }
+
+      return 0;
+    })
+    .filter(
+      (customer) =>
+        customer.name.toLowerCase().includes(search.toLowerCase()) ||
+        customer.description.toLowerCase().includes(search.toLowerCase()) ||
+        customer.number.toString().toLowerCase().includes(search.toLowerCase())
+    )
+    .slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage);
+
+  const countPage = `${currentPage * rowsPerPage + 1} - ${
+    customersToRender.length - rowsPerPage + (currentPage + 1) * rowsPerPage
+  } of ${customersToRender.length} `;
+
+  const handleClickNextPage = () => {
+    var result = Math.ceil(customersList.length / rowsPerPage);
+    if (currentPage + 1 < result) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleClickPreviousPage = () => {
+    if (currentPage - 1 >= 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  function deleteCustomer(id) {
+    let filtered = customersList.filter((customer) => customer.number !== id);
+    if (window.confirm("Are you sure you want to delete")) {
+      setCustomersList(filtered);
+    }
+  }
+
+  function editCustomer(id) {
+    let filteredEditCustomers = customersList.filter(
+      (customer) => customer.number === id
+    );
+
+    window.scrollTo(1000, 0);
+    setSubmit(true);
+    setFilteredEdit(filteredEditCustomers[0]);
+    setFilteredEdit((formData) => {
+      return { ...formData, border: "d" };
+    });
+
+    setIndex(customersList.indexOf(filteredEditCustomers[0]));
+  }
+
+  useEffect(() => {
+    localStorage.setItem("local", JSON.stringify(customersList));
+  }, [customersList]);
 
   return (
     <div>
-      <Header array={customersList} arrayOriginal={customers} search={setcustomersList} />
-      <Table array={customersList} setcustomersList={setcustomersList} />
-      <Footer array={customersList} />
+      <Form
+        customers={customersList}
+        onSubmit={handleSubmit}
+        filteredEdit={filteredEdit}
+        index={index}
+      />
+      <Header onSearchChange={setSearch} />
+      <Table
+        customers={customersToRender}
+        deleteWhenClick={deleteCustomer}
+        editWhenClick={editCustomer}
+        handelSortChange={handelSortChange}
+      />
+      <Footer
+        allCustomers={customersList}
+        countPage={countPage}
+        onChangeSelect={setRowsPerPage}
+        onClickNextPage={handleClickNextPage}
+        onClickPreviousPage={handleClickPreviousPage}
+      />
     </div>
   );
-}
-
-export default App;
+};

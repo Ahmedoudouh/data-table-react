@@ -1,42 +1,40 @@
-import Name from "./Name/Name.jsx";
-import Number from "./Number/Number.jsx";
-import Pargraph from "./Paragraph/Paragraph.jsx";
-import Rate from "./Rate/Rate.jsx";
-import Checkbox from "./Checkbox/Checkbox.jsx";
-import Balance from "./Balance/Balance.jsx";
-import Deposit from "./Deposit/Deposit.jsx";
-import Status from "./Status/Status.jsx";
-import Icon from "./Icon/Icon.jsx";
-import Inr from "./Inr/Inr.jsx";
-import "./Style-tbody.css";
+import { Name } from "./Name/name";
+import { Number } from "./Number/number";
+import { Paragraph } from "./Paragraph/paragraph";
+import { Rate } from "./Rate/rate";
+import { Checkbox } from "./Checkbox/checkbox";
+import { Balance } from "./Balance/balance";
+import { Deposit } from "./Deposit/deposit";
+import { Status } from "./Status/status";
+import { Icon } from "./Icon/icon";
+import { IconEdit } from "./icon-edit/icon-edit";
+import { Inr } from "./Inr/inr";
+import "./style-tbody.css";
 
-export const Tbody = ({ arrayCustomers, setcustomersList }) => {
-  const deleteC = (customerId) => {
-    const newArray = [...arrayCustomers];
-
-    const index = arrayCustomers.findIndex(
-      (customer) => customer.id === customerId
-    );
-
-    newArray.splice(index, 1);
-    setcustomersList(newArray);
-  };
+export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
+  setTimeout(() => {
+    customers.forEach((row) => {
+      if (row.border === true || row.border === "d") {
+        row.border = false;
+      }
+    });
+  }, 1000);
 
   return (
     <tbody className="bg-white" id="mytbody">
-      {arrayCustomers.map((customer) => (
+      {customers.map((customer) => (
         <tr className="tdClass array">
           <td className="td">
             <Checkbox />
           </td>
           <td className="td">
-            <div className="group-customr">
+            <div className="group-customer">
               <Name name={customer.name} />
               <Number number={customer.number} />
             </div>
           </td>
           <td className="td">
-            <Pargraph description={customer.description} />
+            <Paragraph description={customer.description} />
           </td>
           <td className="td">
             <div className="d-flex">
@@ -78,12 +76,16 @@ export const Tbody = ({ arrayCustomers, setcustomersList }) => {
             />
           </td>
           <td className="td">
-            <Icon array={arrayCustomers} deleteWhenClick={deleteC} />
+            <div className="icons-style">
+              <Icon deleteWhenClick={() => deleteWhenClick(customer.number)} />
+              <IconEdit
+                index={index}
+                editWhenClick={() => editWhenClick(customer.number)}
+              />
+            </div>
           </td>
         </tr>
       ))}
     </tbody>
   );
 };
-
-export default Tbody;

@@ -1,11 +1,10 @@
-import "./Style-rate.css";
+import "./style-rate.css";
 
-export const Rate=({rate,inr})=>{
-    return (
-        <div className="group-customr-b">
-            <span className="number">{rate}</span>
-            <span className="inr">{inr}</span>
-        </div>
-    );
-}
-export default Rate;
+export const Rate = ({ rate, inr }) => {
+  return (
+    <div className="group-customer-b">
+      <span className="number">{rate}</span>
+      <span className="inr">{inr}</span>
+    </div>
+  );
+};

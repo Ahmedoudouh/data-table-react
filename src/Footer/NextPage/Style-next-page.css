@@ -1,9 +1,9 @@
 .arrow {
-    border: 2px solid #606f89;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(136deg);
-    left: 16px;
-    top: -5px;
+  border: 2px solid #606f89;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(136deg);
+  left: 16px;
+  top: -5px;
 }

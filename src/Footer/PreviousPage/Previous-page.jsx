@@ -1,10 +1,7 @@
-import "./Style-Previous-page.css";
+import "./style-previous-page.css";
 
-function PreviousPage() {
-    return (
-        <a>
-            <i id="arrow-left" className="arrow"></i>
-        </a>
-    );
-}
-export default PreviousPage;
+export const PreviousPage = ({ onClickPreviousPage }) => {
+  return (
+    <i id="arrow-left" className="arrow" onClick={onClickPreviousPage}></i>
+  );
+};

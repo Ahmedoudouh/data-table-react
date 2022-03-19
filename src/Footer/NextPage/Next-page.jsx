@@ -1,10 +1,5 @@
-import "./Style-next-page.css";
+import "./style-next-page.css";
 
-function NextPage() {
-    return (
-        <a>
-            <i id="arrow-right" className="arrow-2"></i>
-        </a>
-    );
-}
-export default NextPage;
+export const NextPage = ({ onclick }) => {
+  return <i id="arrow-right" className="arrow-2" onClick={onclick}></i>;
+};

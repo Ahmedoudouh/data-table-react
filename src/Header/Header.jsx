@@ -1,16 +1,14 @@
-import Input from "../Input/Input-search.jsx"
-import "./Style-Header.css";
+import { Input } from "../Input/input-search";
+import "./style-header.css";
 
-export const Header = ({ array, search, arrayOriginal }) => {
+export const Header = ({ onSearchChange }) => {
   return (
-    <div>
+    <div className="margin">
       <div className="group-icon bg">
         <div className="icons">
-          <Input SearchedCustomers={array} filteredFunction={search} arrayOriginal={arrayOriginal} />
+          <Input onSearchChange={onSearchChange} />
         </div>
       </div>
     </div>
   );
-}
-
-export default Header;
+};

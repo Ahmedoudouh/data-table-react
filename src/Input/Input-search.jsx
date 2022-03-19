@@ -1,23 +1,8 @@
-import "./Style-input.css"
-import { useState } from "react";
+import "./style-input.css";
 
-export const Input = ({ filteredFunction, arrayOriginal }) => {
-
-  const [search, setsearch] = useState("")
-
-  const filteredPersons = arrayOriginal.filter(
-    customer => {
-      return (
-        customer.name.toLowerCase().includes(search.toLowerCase()) &&
-        customer.description.toLowerCase().includes(search.toLowerCase())
-      );
-    }
-
-  );
-
-  const handleChange = e => {
-    setsearch(e.target.value);
-    filteredFunction(filteredPersons)
+export const Input = ({ onSearchChange }) => {
+  const handleChange = (e) => {
+    onSearchChange(e.target.value);
   };
 
   return (
@@ -28,11 +13,13 @@ export const Input = ({ filteredFunction, arrayOriginal }) => {
           <div className="search-2"></div>
           <div className="search-3"></div>
         </div>
-        <input onKeyUp={handleChange}
-          className="input-saerch-a padding-saerch" type="text" placeholder="Search" />
+        <input
+          onKeyUp={handleChange}
+          className="input-search-a padding-search"
+          type="text"
+          placeholder="Search"
+        />
       </div>
     </div>
   );
-}
-
-export default Input;
+};

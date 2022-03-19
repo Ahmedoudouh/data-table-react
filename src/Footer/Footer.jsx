@@ -1,27 +1,32 @@
 import React from "react";
-import "./Style-footer.css";
-import Active from "./Active/Active.jsx"
-import PerPage from "./PerPage/Per-page.jsx"
-import NextPage from "./NextPage/Next-page.jsx"
-import PreviousPage from "./PreviousPage/Previous-page.jsx"
+import { Active } from "./Active/active";
+import { PerPage } from "./PerPage/per-page";
+import { NextPage } from "./NextPage/next-page";
+import { PreviousPage } from "./PreviousPage/previous-page";
+import "./style-footer.css";
 
-export const Footer = ({ array }) => {
-    return (
-        <footer className="content footer">
-            <Active ActiveCustomers={array} />
-            <div className="group-footer">
-                <PerPage />
-                <div className="style-grid-gap">
-                    <span id="count-page" className="style-word">
-                    </span>
-                </div>
-                <div className="group-arrow-3">
-                    <PreviousPage />
-                    <NextPage />
-                </div>
-            </div>
-        </footer>
-    );
-}
-
-export default Footer;
+export const Footer = ({
+  allCustomers,
+  onChangeSelect,
+  onClickNextPage,
+  countPage,
+  onClickPreviousPage,
+}) => {
+  return (
+    <footer className="content footer">
+      <Active allCustomers={allCustomers} />
+      <div className="group-footer">
+        <PerPage onChange={onChangeSelect} />
+        <div className="style-grid-gap">
+          <span id="count-page" className="style-word">
+            {countPage}
+          </span>
+        </div>
+        <div className="group-arrow-3">
+          <PreviousPage onClickPreviousPage={onClickPreviousPage} />
+          <NextPage onclick={onClickNextPage} />
+        </div>
+      </div>
+    </footer>
+  );
+};
