@@ -1,10 +1,9 @@
-import "./Style-number.css";
+import "./style-number.css";
 
 export const Number = ({ number }) => {
-    return (
-        <div>
-            <span className="customr-number">{number}</span>
-        </div>
-    );
-}
-export default Number;
+  return (
+    <div>
+      <span className="customer-number">{number}</span>
+    </div>
+  );
+};

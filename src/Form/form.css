@@ -36,14 +36,14 @@
     display: inline-grid;
 }
 
-.input-saerch {
+.input-search {
     width: 300px;
     background: #dae1ec;
     border-radius: 4px;
     border: none;
 }
 
-.padding-saerch-add-customer {
+.padding-search-add-customer {
     padding: 10px;
 }
 

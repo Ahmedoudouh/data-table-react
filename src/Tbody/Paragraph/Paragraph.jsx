@@ -1,10 +1,9 @@
-import "./Style-paragraph.css";
+import "./style-paragraph.css";
 
 export const Paragraph = ({ description }) => {
-    return (
-        <div className="paragraph-customr">
-            <p>{description}</p>
-        </div>
-    );
-}
-export default Paragraph;
+  return (
+    <div className="paragraph-customer">
+      <p>{description}</p>
+    </div>
+  );
+};

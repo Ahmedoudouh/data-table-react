@@ -1,4 +1,5 @@
-import "./Style-Per-page.css";
+import "./style-per-page.css";
+
 export const PerPage = ({ onChange }) => {
   const selectValueRows = (e) => {
     onChange(e.target.value);
@@ -19,4 +20,3 @@ export const PerPage = ({ onChange }) => {
     </div>
   );
 };
-export default PerPage;

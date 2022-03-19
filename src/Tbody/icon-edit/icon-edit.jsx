@@ -1,14 +1,12 @@
 export const IconEdit = ({ editWhenClick }) => {
-
   return (
     <div>
       <img
-      onClick={editWhenClick}
+        onClick={editWhenClick}
         className="icon padding"
-        src="Images/edit.png"
+        src="images/edit.png"
+        alt="icon delete"
       />
     </div>
   );
 };
-
-export default IconEdit;

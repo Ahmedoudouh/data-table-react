@@ -1,42 +1,43 @@
-import "./Style-Informations.css";
 import React, { useEffect, useState } from "react";
+import "./style-information.css";
 
-export const Informations = ({ onChange }) => {
-  const [sortName, setsortName] = useState(undefined);
-  const [sortStatus, setsortStatus] = useState(undefined);
+export const Information = ({ onChange }) => {
+  const [sortName, setSortName] = useState(undefined);
+  const [sortStatus, setSortStatus] = useState(undefined);
+
   const clickSort = (e) => {
-    if (e.target.id == "name-customer") {
+    if (e.target.id === "name-customer") {
       if (sortName === undefined) {
-        setsortName("ascending");
+        setSortName("ascending");
       }
       if (sortName === "ascending") {
-        setsortName("descending");
+        setSortName("descending");
       }
       if (sortName === "descending") {
-        setsortName(undefined);
+        setSortName(undefined);
       }
     }
-    if (e.target.id == "customer-status") {
+    if (e.target.id === "customer-status") {
       if (sortStatus === undefined) {
-        setsortStatus("ascending");
+        setSortStatus("ascending");
       }
       if (sortStatus === "ascending") {
-        setsortStatus("descending");
+        setSortStatus("descending");
       }
       if (sortStatus === "descending") {
-        setsortStatus(undefined);
+        setSortStatus(undefined);
       }
     }
   };
 
   useEffect(() => {
     onChange(sortName, sortStatus);
-  }, [sortName, sortStatus]);
+  }, [onChange, sortName, sortStatus]);
 
   return (
     <thead>
       <tr className="background-table-row-1">
-        <td className="apdding-left td">
+        <td className="padding-left td">
           <input className="checkbox" id="checkedAll" type="checkbox" />
         </td>
         <td className="td">
@@ -50,14 +51,16 @@ export const Informations = ({ onChange }) => {
                 NAME
               </span>
               <div className="group-arrow">
-                <div className={
-                  sortName==="ascending"
-                    ? "ascending":"arrow-up"
-                }></div>
-                <div className={
-                  sortName==="descending"
-                    ? "descending":"arrow-down"
-                }></div>
+                <div
+                  className={
+                    sortName === "ascending" ? "ascending" : "arrow-up"
+                  }
+                ></div>
+                <div
+                  className={
+                    sortName === "descending" ? "descending" : "arrow-down"
+                  }
+                ></div>
               </div>
             </div>
           </div>
@@ -80,18 +83,24 @@ export const Informations = ({ onChange }) => {
               STATUS
             </span>
             <div className="group-arrow">
-              <div id="arrow-up-status" className="arrow-up"className={
-                  sortStatus==="ascending"
-                    ? "ascending":"arrow-up"
-                }></div>
-              <div id="arrow-down-status" className="arrow-down focus"className={
-                  sortStatus==="descending"
-                    ? "descending":"arrow-down"
-                }></div>
+              <div
+                id="arrow-up-status"
+                className="arrow-up"
+                className={
+                  sortStatus === "ascending" ? "ascending" : "arrow-up"
+                }
+              ></div>
+              <div
+                id="arrow-down-status"
+                className="arrow-down focus"
+                className={
+                  sortStatus === "descending" ? "descending" : "arrow-down"
+                }
+              ></div>
             </div>
           </div>
         </td>
-        <td className="apdding-right td">
+        <td className="padding-right td">
           <div className="group-background">
             <div className="background-vector"></div>
             <div className="background-vector"></div>
@@ -102,5 +111,3 @@ export const Informations = ({ onChange }) => {
     </thead>
   );
 };
-
-export default Informations;

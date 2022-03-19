@@ -1,4 +1,4 @@
-import "./Style-input.css";
+import "./style-input.css";
 
 export const Input = ({ onSearchChange }) => {
   const handleChange = (e) => {
@@ -15,7 +15,7 @@ export const Input = ({ onSearchChange }) => {
         </div>
         <input
           onKeyUp={handleChange}
-          className="input-saerch-a padding-saerch"
+          className="input-search-a padding-search"
           type="text"
           placeholder="Search"
         />
@@ -23,5 +23,3 @@ export const Input = ({ onSearchChange }) => {
     </div>
   );
 };
-
-export default Input;

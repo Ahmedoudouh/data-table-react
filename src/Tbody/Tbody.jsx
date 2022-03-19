@@ -1,20 +1,20 @@
-import Name from "./Name/Name";
-import Number from "./Number/Number";
-import Pargraph from "./Paragraph/Paragraph";
-import Rate from "./Rate/Rate.jsx";
-import Checkbox from "./Checkbox/Checkbox";
-import Balance from "./Balance/Balance";
-import Deposit from "./Deposit/Deposit";
-import Status from "./Status/Status";
-import Icon from "./Icon/Icon";
-import IconEdit from "./icon-edit/icon-edit";
-import Inr from "./Inr/Inr";
-import "./Style-tbody.css";
+import { Name } from "./Name/name";
+import { Number } from "./Number/number";
+import { Paragraph } from "./Paragraph/paragraph";
+import { Rate } from "./Rate/rate";
+import { Checkbox } from "./Checkbox/checkbox";
+import { Balance } from "./Balance/balance";
+import { Deposit } from "./Deposit/deposit";
+import { Status } from "./Status/status";
+import { Icon } from "./Icon/icon";
+import { IconEdit } from "./icon-edit/icon-edit";
+import { Inr } from "./Inr/inr";
+import "./style-tbody.css";
 
 export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
   setTimeout(() => {
     customers.forEach((row) => {
-      if (row.border === true||row.border === "d") {
+      if (row.border === true || row.border === "d") {
         row.border = false;
       }
     });
@@ -28,13 +28,13 @@ export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
             <Checkbox />
           </td>
           <td className="td">
-            <div className="group-customr">
+            <div className="group-customer">
               <Name name={customer.name} />
               <Number number={customer.number} />
             </div>
           </td>
           <td className="td">
-            <Pargraph description={customer.description} />
+            <Paragraph description={customer.description} />
           </td>
           <td className="td">
             <div className="d-flex">
@@ -89,5 +89,3 @@ export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
     </tbody>
   );
 };
-
-export default Tbody;

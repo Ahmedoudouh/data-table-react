@@ -2,7 +2,7 @@ import "./style-active-customers.css";
 
 export const Active = ({ allCustomers }) => {
   var activeCustomersCount = allCustomers.filter(
-    (customer) => customer.status == "ACTIVE"
+    (customer) => customer.status === "ACTIVE"
   ).length;
 
   return (
@@ -17,5 +17,3 @@ export const Active = ({ allCustomers }) => {
     </div>
   );
 };
-
-export default Active;

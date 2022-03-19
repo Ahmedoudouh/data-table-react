@@ -1,4 +1,5 @@
-import Status from "./Status.jsx";
+import { useEffect, useState } from "react";
+import { Status } from "./status";
 import {
   selectCheck,
   matchNumber,
@@ -8,20 +9,16 @@ import {
   alreadyExistsName,
   alreadyExistsNumber,
 } from "./utils.js";
-import Currency from "./Currency.jsx";
-import Input from "./inputs-form";
-import { useEffect, useState } from "react";
+import { Currency } from "./currency";
+import { Input } from "./inputs-form";
 import "./form.css";
 
-export const Form = ({
-  customers,
-  onSubmit,
-  filteredEdit,
-  index,
-}) => {
-  const [errorvalue, setErrorvalue] = useState({});
-  const [chekSubmit, setChekSubmit] = useState(false);
-  const [formData, setFormdata] = useState({
+export const Form = ({ customers, onSubmit, filteredEdit, index }) => {
+  const [errorValue, setErrorValue] = useState({});
+  const [checkSubmit, setCheckSubmit] = useState(false);
+  const [edit, setEdit] = useState();
+
+  const [formData, setFormData] = useState({
     name: undefined,
     number: undefined,
     description: undefined,
@@ -33,94 +30,41 @@ export const Form = ({
     border: true,
   });
 
-  function handlechangeName(event) {
-    setFormdata((prevFromdata) => {
+  function handleInputChange(event) {
+    setFormData((prevFromData) => {
       return {
-        ...prevFromdata,
+        ...prevFromData,
         [event.target.name]: event.target.value,
       };
     });
   }
-  function handlechangenumber(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeDescription(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeRate(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeBalance(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeDeposit(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeStatus(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  function handlechangeCurrency(event) {
-    setFormdata((prevFromdata) => {
-      return {
-        ...prevFromdata,
-        [event.target.name]: event.target.value,
-      };
-    });
-  }
-  const [edit, setEdit] = useState();
+
   function editCustomer(filteredEdit) {
     if (filteredEdit !== undefined) {
-      setFormdata(filteredEdit);
+      setFormData(filteredEdit);
       let copyCustomers = customers.slice();
-      let filltredEleme = copyCustomers.filter(
-        (customer) => customers.indexOf(customer) != index
+
+      let filteredCustomers = copyCustomers.filter(
+        (customer) => customers.indexOf(customer) !== index
       );
-      setEdit(filltredEleme);
+
+      setEdit(filteredCustomers);
     }
   }
   useEffect(() => {
-    setChekSubmit(chekSubmit);
-  }, [chekSubmit]);
+    setCheckSubmit(checkSubmit);
+  }, [checkSubmit]);
+
   useEffect(() => {
     editCustomer(filteredEdit);
   }, [filteredEdit]);
 
-  function handlSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    if (Object.values(errorvalue).every((error) => error === true)) {
-      setChekSubmit(false);
-      onSubmit(formData,setFormdata);
-      setFormdata({
+    if (Object.values(errorValue).every((error) => error === true)) {
+      setCheckSubmit(false);
+      onSubmit(formData, setFormData);
+      setFormData({
         name: "",
         number: "",
         description: "",
@@ -131,16 +75,16 @@ export const Form = ({
         status: "",
       });
     } else {
-      setChekSubmit(true);
+      setCheckSubmit(true);
     }
   }
 
   function checkCustomer(formData) {
     if (
-      Object.values(formData).every((value) => value == "") &&
-      chekSubmit === false
+      Object.values(formData).every((value) => value === "") &&
+      checkSubmit === false
     ) {
-      setFormdata({
+      setFormData({
         name: undefined,
         number: undefined,
         description: undefined,
@@ -149,11 +93,11 @@ export const Form = ({
         balance: undefined,
         deposit: undefined,
         status: undefined,
-        border:true,
+        border: true,
       });
     }
-    if (chekSubmit) {
-      setFormdata({
+    if (checkSubmit) {
+      setFormData({
         name: "",
         number: "",
         description: "",
@@ -163,12 +107,12 @@ export const Form = ({
         deposit: "",
         status: "status",
       });
-      setChekSubmit(false);
+      setCheckSubmit(false);
     } else {
       let errorName = "";
-      if (formData.name != undefined) {
+      if (formData.name !== undefined) {
         errorName = matchString(formData.name, "name");
-        if (formData.name == "") {
+        if (formData.name === "") {
           errorName = required(formData.name, "name");
         }
         let customerExist = alreadyExistsName(customers, formData.name, "name");
@@ -179,11 +123,11 @@ export const Form = ({
           errorName = "customer name already exists";
         }
       }
-      //
+
       let errorNumber = "";
-      if (formData.number != undefined) {
+      if (formData.number !== undefined) {
         errorNumber = matchNumber(formData.number, "number");
-        if (formData.number == "") {
+        if (formData.number === "") {
           errorNumber = required(formData.number, "number");
         }
         let customerExist = alreadyExistsNumber(customers, formData.number);
@@ -196,52 +140,52 @@ export const Form = ({
       }
       //
       let errorDescription = "";
-      if (formData.description != undefined) {
+      if (formData.description !== undefined) {
         errorDescription = description(formData.description.length);
-        if (formData.description == "") {
+        if (formData.description === "") {
           errorDescription = required(formData.description, "description");
         }
       }
       //
-      let erroRrate = "";
-      if (formData.rate != undefined) {
-        erroRrate = matchNumber(formData.rate, "rate");
-        if (formData.rate == "") {
-          erroRrate = required(formData.rate, "rate");
+      let errorRate = "";
+      if (formData.rate !== undefined) {
+        errorRate = matchNumber(formData.rate, "rate");
+        if (formData.rate === "") {
+          errorRate = required(formData.rate, "rate");
         }
       }
       //
       let errorBalance = "";
-      if (formData.balance != undefined) {
+      if (formData.balance !== undefined) {
         errorBalance = matchNumber(formData.balance, "balance");
-        if (formData.balance == "") {
+        if (formData.balance === "") {
           errorBalance = required(formData.balance, "balance");
         }
       }
       //
       let errorDeposit = "";
-      if (formData.deposit != undefined) {
+      if (formData.deposit !== undefined) {
         errorDeposit = matchNumber(formData.deposit, "deposit");
-        if (formData.deposit == "") {
+        if (formData.deposit === "") {
           errorDeposit = required(formData.deposit, "deposit");
         }
       }
       //
       let errorStatus = "";
-      if (formData.status != undefined) {
+      if (formData.status !== undefined) {
         errorStatus = selectCheck(formData.status, "status");
       }
       //
       let errorCurrency = "";
-      if (formData.inr != undefined) {
+      if (formData.inr !== undefined) {
         errorCurrency = selectCheck(formData.inr, "currency");
       }
-      setErrorvalue((prevErros) => ({
-        ...prevErros,
+      setErrorValue((prevErrors) => ({
+        ...prevErrors,
         name: errorName,
         number: errorNumber,
         description: errorDescription,
-        rate: erroRrate,
+        rate: errorRate,
         balance: errorBalance,
         deposit: errorDeposit,
         status: errorStatus,
@@ -249,70 +193,67 @@ export const Form = ({
       }));
     }
   }
+
   useEffect(() => {
     checkCustomer(formData);
-  }, [formData, customers, chekSubmit]);
+  }, [formData, customers, checkSubmit]);
 
   return (
     <div>
-      <form
-        onSubmit={handlSubmit}
-        id="form"
-        className="style-add-customer"
-      >
+      <form onSubmit={handleSubmit} id="form" className="style-add-customer">
         <p className="title">Add customer :</p>
         <Input
-          onChange={handlechangeName}
+          onChange={handleInputChange}
           valueData={formData.name}
-          textError={errorvalue.name}
+          textError={errorValue.name}
           name="name"
           placeholder="add Name"
           type="text"
         />
         <Input
-          onChange={handlechangenumber}
+          onChange={handleInputChange}
           valueData={formData.number}
-          textError={errorvalue.number}
+          textError={errorValue.number}
           name="number"
           type="text"
         />
         <Input
-          onChange={handlechangeDescription}
+          onChange={handleInputChange}
           valueData={formData.description}
-          textError={errorvalue.description}
+          textError={errorValue.description}
           name="description"
           type="text"
         />
         <Input
-          onChange={handlechangeRate}
+          onChange={handleInputChange}
           valueData={formData.rate}
-          textError={errorvalue.rate}
+          textError={errorValue.rate}
           name="rate"
           type="text"
         />
         <Input
-          onChange={handlechangeBalance}
+          onChange={handleInputChange}
           valueData={formData.balance}
-          textError={errorvalue.balance}
+          textError={errorValue.balance}
           name="balance"
           type="text"
         />
         <Input
-          onChange={handlechangeDeposit}
+          onChange={handleInputChange}
           valueData={formData.deposit}
-          textError={errorvalue.deposit}
+          textError={errorValue.deposit}
           name="deposit"
           type="text"
         />
         <Status
-          functionValue={handlechangeStatus}
+          functionValue={handleInputChange}
           valueData={formData.status}
-          textError={errorvalue.status}
+          textError={errorValue.status}
         />
         <Currency
-          functionValue={handlechangeCurrency}
+          functionValue={handleInputChange}
           valueData={formData.inr}
-          textError={errorvalue.inr}
+          textError={errorValue.inr}
         />
         <div className="button">
           <button className="submit" id="submit">
@@ -323,4 +264,3 @@ export const Form = ({
     </div>
   );
 };
-export default Form;

@@ -1,10 +1,9 @@
-import "./Style-checkbox.css";
+import "./style-checkbox.css";
 
-function Checkbox() {
-    return (
-        <div className="td padding-left">
-            <input className="checkbox" id="checkbox" type="checkbox" />
-        </div>
-    );
-}
-export default Checkbox;
+export const Checkbox = () => {
+  return (
+    <div className="td padding-left">
+      <input className="checkbox" id="checkbox" type="checkbox" />
+    </div>
+  );
+};

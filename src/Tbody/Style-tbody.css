@@ -1,104 +1,104 @@
 .tdClass:nth-child(2n) {
-    background: #f4f7fc;
+  background: #f4f7fc;
 }
 
-.tdClasss {
-    border: 1px solid #4d4f54;
+.td-class {
+  border: 1px solid #4d4f54;
 }
 
 td {
-    padding: 11px 0;
+  padding: 11px 0;
 }
 
 .tdClass:hover {
-    background: #00ffff1f;
+  background: #00ffff1f;
 }
 
 .tdClass:hover:nth-child(2n) {
-    background: #00ffff1f;
+  background: #00ffff1f;
 }
 
 .checkbox {
-    border: 1px solid #6f809e;
-    border-radius: 3px;
-    background: none;
-    display: flex;
+  border: 1px solid #6f809e;
+  border-radius: 3px;
+  background: none;
+  display: flex;
 }
 
-.group-customr {
-    display: grid;
+.group-customer {
+  display: grid;
 }
 
 .table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 20px;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .bg-white {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .active {
-    font-weight: 500;
-    font-size: 10px;
-    color: #606f89;
-    background: none;
-    border: 1px solid #606f89;
-    padding: 4px 5px;
-    cursor: pointer;
-    border-radius: 11px;
+  font-weight: 500;
+  font-size: 10px;
+  color: #606f89;
+  background: none;
+  border: 1px solid #606f89;
+  padding: 4px 5px;
+  cursor: pointer;
+  border-radius: 11px;
 }
 
 .inactive {
-    background: #0a65ff;
-    border-radius: 11px;
-    font-weight: 500;
-    font-size: 10px;
-    line-height: 12px;
-    color: #ffffff;
-    border: none;
-    padding: 4px 5px;
-    cursor: pointer;
+  background: #0a65ff;
+  border-radius: 11px;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ffffff;
+  border: none;
+  padding: 4px 5px;
+  cursor: pointer;
 }
 
 .border-color-green {
-    border: 1px solid #3ced1a;
+  border: 1px solid #3ced1a;
 }
 
 .number {
-    font-size: 14px;
-    line-height: 17px;
-    text-align: right;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: right;
 }
 
 .color-red {
-    color: #e01a1a;
+  color: #e01a1a;
 }
 
 .color-green {
-    color: #008400;
+  color: #008400;
 }
 
 .d-flex {
-    display: inline-grid;
+  display: inline-grid;
 }
 
 .icons-style {
-    display: flex;
+  display: flex;
 }
 
 .border {
-    border: 1px solid #dfd3d3;
+  border: 1px solid #dfd3d3;
 }
 
 .new {
-    display: none;
+  display: none;
 }
 
 .newBlock {
-    display: block;
-    font-size: 7px;
-    margin: -12px 0px 0px 9px;
-    color: #a9b7b7;
+  display: block;
+  font-size: 7px;
+  margin: -12px 0px 0px 9px;
+  color: #a9b7b7;
 }

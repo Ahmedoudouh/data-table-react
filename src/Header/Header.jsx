@@ -1,5 +1,6 @@
-import Input from "../Input/Input-search.jsx";
+import { Input } from "../Input/input-search";
 import "./style-header.css";
+
 export const Header = ({ onSearchChange }) => {
   return (
     <div className="margin">
@@ -11,5 +12,3 @@ export const Header = ({ onSearchChange }) => {
     </div>
   );
 };
-
-export default Header;

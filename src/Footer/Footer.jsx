@@ -1,9 +1,9 @@
 import React from "react";
-import "./Style-footer.css";
-import Active from "./Active/Active.jsx";
-import PerPage from "./PerPage/Per-page.jsx";
-import NextPage from "./NextPage/Next-page.jsx";
-import PreviousPage from "./PreviousPage/Previous-page.jsx";
+import { Active } from "./Active/active";
+import { PerPage } from "./PerPage/per-page";
+import { NextPage } from "./NextPage/next-page";
+import { PreviousPage } from "./PreviousPage/previous-page";
+import "./style-footer.css";
 
 export const Footer = ({
   allCustomers,
@@ -30,5 +30,3 @@ export const Footer = ({
     </footer>
   );
 };
-
-export default Footer;

@@ -1,16 +1,14 @@
-import "./Style-icon.css";
+import "./style-icon.css";
 
 export const Icon = ({ deleteWhenClick }) => {
-
   return (
     <div>
       <img
         onClick={deleteWhenClick}
         className="icon padding"
-        src="Images/trash.png"
+        src="images/trash.png"
+        alt="icon"
       />
     </div>
   );
 };
-
-export default Icon;
