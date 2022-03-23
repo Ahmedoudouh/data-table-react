@@ -73,6 +73,7 @@ export const Form = ({ customers, onSubmit, filteredEdit, index }) => {
         balance: "",
         deposit: "",
         status: "",
+        
       });
     } else {
       setCheckSubmit(true);

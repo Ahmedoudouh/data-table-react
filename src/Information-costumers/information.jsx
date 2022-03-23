@@ -32,7 +32,7 @@ export const Information = ({ onChange }) => {
 
   useEffect(() => {
     onChange(sortName, sortStatus);
-  }, [onChange, sortName, sortStatus]);
+  }, [sortName, sortStatus]);
 
   return (
     <thead>
