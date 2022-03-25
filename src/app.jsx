@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { Header } from "./Header/header";
 import { Table } from "./Table/table";
 import { Footer } from "./Footer/footer";
 import { Form } from "./Form/form";
 import data from "./data";
 import "./app.css";
-
+import { context } from "./context/context";
 export const App = () => {
   if (localStorage.getItem("local") === null) {
     localStorage.setItem("local", JSON.stringify(data));
   }
-
+  const { rowsPerPage, setRowsPerPage,currentPage,setCurrentPage,sort,setSort} = useContext(context)
   const [customersList, setCustomersList] = useState(
     JSON.parse(localStorage.getItem("local"))
   );
 
-  const [sort, setSort] = useState({ name: "", status: "" });
+  //const [sort, setSort] = useState({ name: "", status: "" });
   const [search, setSearch] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(0);
   const [filteredEdit, setFilteredEdit] = useState({ border: "d" });
   const [submit, setSubmit] = useState();
   const [index, setIndex] = useState();
+  
+
 
   const handelSortChange = (sortName, sortStatus) => {
     setSort({ name: sortName, status: sortStatus });

@@ -14,7 +14,6 @@ import "./style-tbody.css";
 export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
   setTimeout(() => {
     customers.forEach((row) => {
-      console.log(row.border)
       if (row.border === true || row.border === "d") {
         row.border = false;
       }
@@ -27,7 +26,6 @@ export const Tbody = ({ customers, deleteWhenClick, editWhenClick, index }) => {
         <tr className="tdClass array">
           <td className="td">
             <Checkbox />
-            {console.log(customer.border)}
             <span className={customer.border === true ? "newBlock" : "new"}>
               new
             </span>
