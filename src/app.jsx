@@ -15,13 +15,10 @@ export const App = () => {
     JSON.parse(localStorage.getItem("local"))
   );
 
-  //const [sort, setSort] = useState({ name: "", status: "" });
   const [search, setSearch] = useState("");
   const [filteredEdit, setFilteredEdit] = useState({ border: "d" });
   const [submit, setSubmit] = useState();
   const [index, setIndex] = useState();
-  
-
 
   const handelSortChange = (sortName, sortStatus) => {
     setSort({ name: sortName, status: sortStatus });
