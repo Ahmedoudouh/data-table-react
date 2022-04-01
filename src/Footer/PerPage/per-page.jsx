@@ -1,10 +1,9 @@
 import "./style-per-page.css";
-
+import React, { useCallback } from "react";
 export const PerPage = ({ onChange }) => {
-  const selectValueRows = (e) => {
+  const selectValueRows = useCallback((e) => {
     onChange(e.target.value);
-  };
-
+  }, []);
   return (
     <div>
       <span className="style-word">

@@ -1,4 +1,10 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useMemo,
+  useCallback,
+} from "react";
 import { Header } from "./Header/header";
 import { Table } from "./Table/table";
 import { Footer } from "./Footer/footer";
@@ -6,11 +12,20 @@ import { Form } from "./Form/form";
 import data from "./data";
 import "./app.css";
 import { context } from "./context/context";
+//import { useCallback } from "react/cjs/react.production.min";
+
 export const App = () => {
   if (localStorage.getItem("local") === null) {
     localStorage.setItem("local", JSON.stringify(data));
   }
-  const { rowsPerPage, setRowsPerPage,currentPage,setCurrentPage,sort,setSort} = useContext(context)
+  const {
+    rowsPerPage,
+    setRowsPerPage,
+    currentPage,
+    setCurrentPage,
+    sort,
+    setSort,
+  } = useContext(context);
   const [customersList, setCustomersList] = useState(
     JSON.parse(localStorage.getItem("local"))
   );
@@ -19,11 +34,13 @@ export const App = () => {
   const [filteredEdit, setFilteredEdit] = useState({ border: "d" });
   const [submit, setSubmit] = useState();
   const [index, setIndex] = useState();
-
-  const handelSortChange = (sortName, sortStatus) => {
-    setSort({ name: sortName, status: sortStatus });
-  };
-
+  const handelSortChange = useCallback(
+    (sortName, sortStatus) => {
+      setSort({ name: sortName, status: sortStatus });
+    },
+    [sort]
+  );
+  //
   function handleSubmit(formData) {
     if (submit === true) {
       customersList.splice(index, 1, formData);
